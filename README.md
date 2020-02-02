@@ -1,6 +1,6 @@
 # Wilma Webb Application
 ## Deplyment
-For this to work you have to put your ssh public key in to gitlab
+Clone the repo
 
 Then go in to the directory:
 ```
