@@ -1,0 +1,52 @@
+{% extends "main/main.html" %}
+{% block content %}
+    <form id="searchform" class="example" action="{% url 'listfriends' %}" style="margin:auto;max-width:300px">
+      {% if messages %}
+        <input id='searchinput' type="text" name='search' placeholder="Search...">
+      {% else %}
+        <input id='searchinput' type="text" name='search' value="{{ request.GET.search }}" placeholder="Search...">
+      {% endif %}
+      <button id='searchbutton' class="btn btn-outline-success" type="submit" value='{{ request.GET.search }}'>Search</button>
+    </form><br>
+    {% for user in users %}
+    <div class="borde-posts mb-4">
+        <div class="container-fluid" style="padding: 15px;">
+            <div class="row" style="margin: 0px; margin-top: 15px;">
+                <div class="col-sm-auto">
+                    <img class="rounded-circle account-img" style="height: 65px; width:65px;" src="{{ user.profile.image.url }}" alt="Image">
+                </div>
+                <div class="col-sm">
+                    <div class="row">
+                        <div class="col-12 article-metadata">
+                            <a class="mr-2" href="{% url 'seeprofile' user.username %}" style="word-wrap: anywhere;">{{ user.username }}</a>                        
+                        </div>
+                        <div class="col-12">
+                        {% if user.profile.bio %}
+                            <div class="text-secondary">{{user.profile.bio}}</div>
+                        {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% if is_paginated %}
+    {% if page_obj.has_previous %}
+      <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+        <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+      {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+      {% endif%}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+    {% endif %}
+
+{% endif %}
+
+{% endblock content %}

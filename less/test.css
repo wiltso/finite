@@ -1,0 +1,17 @@
+.jqs-options-duplicate,
+.jqs-options-remove {
+  display: inline-block;
+  cursor: pointer;
+  padding: 5px 10px;
+  margin-right: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #f5f5f5;
+  color: #444;
+  font-weight: 700;
+  font-size: 11px;
+}
+.jqs-options-duplicate:hover,
+.jqs-options-remove:hover {
+  background: #e5e5e5;
+  color: #333;
+}

@@ -1,0 +1,20 @@
+{% block daybar %}
+    <div class="row mb-3 mt-5">
+        <div class="col-12" style="z-index: 100;">
+            {% if day <= -5 %}
+                <a class="float-left items mr-2 button-style bg-button" href="{% url ''|add:where username=username day=day %}">To today</a>
+                <a class="float-left items mr-2 button-style ml-4 pl-4" href="{% url ''|add:where username=username day=day %}">{{ date|date:"j M"}}</a>
+                <a class="float-left items mr-2 button-style" href="{% url ''|add:where username=username day=nextday %}">&rArr;</a>
+            {% elif day >= 7 %}
+                <a class="float-left items mr-2 button-style bg-button" href="{% url ''|add:where username=username day=0 %}">To today</a>
+                <a class="float-left items mr-2 button-style" href="{% url ''|add:where username=username day=beforday %}">&lArr;</a>
+                <a class="float-left items mr-2 button-style" href="{% url ''|add:where username=username day=day %}">{{ date|date:"j M"}}</a>
+            {% else %}
+                <a class="float-left items mr-2 button-style bg-button" href="{% url ''|add:where username=username day=0 %}">To today</a>
+                <a class="float-left items mr-2 button-style" href="{% url ''|add:where username=username day=beforday %}">&lArr;</a>
+                <a class="float-left items mr-2 button-style" href="{% url ''|add:where username=username day=day %}">{{ date|date:"j M"}}</a>
+                <a class="float-left items mr-2 button-style" href="{% url ''|add:where username=username day=nextday %}">&rArr;</button></a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock daybar %}

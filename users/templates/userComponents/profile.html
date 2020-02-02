@@ -1,0 +1,89 @@
+{% extends "main/main2.html" %}
+{% block content %}
+    <div class="row" style="height: 250px;margin-top:-20px;background-color:#002138;"></div>
+    <div class="row" style="margin-top: -200px;">
+        <div class="col-12 text-center">
+            <img class="rounded-circle" src="{{ user.profile.image.url }}" alt="Image" style="width:300px;height:300px;background-color:#fff;border:12px solid #fff !important;">
+        </div>
+    </div>
+    <div class="row text-center mt-4">
+        <div class="col-1 col-sm-1 col-md-2 col-lg-3"></div>
+        <div class="col-10 col-sm-10 col-md-8 col-lg-6 text-center pb-4" style="border-bottom: 2px solid #ccc;">
+            <h1 style="word-wrap: anywhere;font-weight:300;">{{ user.username }}</h1>
+        </div>
+        <div class="col-1 col-sm-1 col-md-2 col-lg-3"></div>
+    </div>
+    {% if user.profile.bio %}
+    <div class="row text-center mt-5">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6 text-center">
+            <h4 style="font-weight:500;">{{ user.profile.bio }}</h4>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+    {% endif %}
+    <div class="row mt-5 pt-2 text-center mb-5">
+        <div class="col-lg-3"></div>
+        <div class="col-sm-12 col-lg-6 d-none d-sm-block text-center">
+            <a href="{% url 'settings' %}" class="mr-2">
+                <button class="p-2 profile-button" type="button">Settings</button>
+            </a>
+            <a href="{% url 'changePassword' %}" class="mr-2">
+                <button class="p-2 profile-button" type="button">Change your password</button>
+            </a>
+            <a href="{% url 'logout' %}" class="">
+                <button class="p-2 profile-button" type="button">Log out</button>
+            </a>
+        </div>
+        <div class="col-lg-3"></div>
+        <div class="col-12 d d-sm-none">
+            <div class="col-12 text-center">
+                <a href="{% url 'changePassword' %}" class="mr-1">
+                    <button class="p-2 profile-button" type="button">Change your password</button>
+                </a>
+            </div>
+            <div class="col-12 text-center mt-3">
+                <a href="{% url 'settings' %}" class="mr-3">
+                    <button class="p-2 profile-button" type="button">Settings</button>
+                </a>
+                <a href="{% url 'logout' %}" class="">
+                    <button class="p-2 profile-button" type="button">Log out</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    {% for requests in friendRequests %}
+        <div class="row">
+            <div class="col-1 col-sm-1 col-md-2 col-lg-3"></div>
+            <div class="borde-posts mb-3 col-10 col-sm-10 col-md-8 col-lg-6">
+                <div class="container-fluid" style="padding: 15px;">
+                    <div class="row" style="margin: 0px; margin-top: 15px;">
+                        <div class="col-sm-auto">
+                            <img class="rounded-circle account-img" src="{{ requests.1.profile.image.url }}" alt="Image">
+                        </div>
+                        <div class="col-sm">
+                            <div class="row">
+                                <div class="col-12 article-metadata">
+                                    <h2 class="account-heading" style="word-wrap: anywhere;">{{ requests.1.username }}</h2>
+                                </div>
+                                <div class="col-12">
+                                {% if requests.1.profile.bio %}
+                                    <div class="text-secondary">{{ requests.1.profile.bio }}</div>
+                                {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3" style="margin: 0px; margin-bottom: 15px;">
+                        <a href="{% url 'friendRequestAccept' requests.0 %}" class="mr-2 mt-2">
+                            <button class='btn btn-outline-success' type="button">Accept</button>
+                        </a>
+                        <a href="{% url 'friendRequestReject' requests.0 %}" class="mt-2">
+                            <button class='btn btn-outline-danger' type="button">Reject</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock content %}

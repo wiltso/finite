@@ -1,0 +1,85 @@
+{% extends "main/main.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    {% for requests in friendRequests %}
+        <div class="borde-posts mb-3">
+            <div class="container-fluid" style="padding: 15px;">
+                <div class="row" style="margin: 0px; margin-top: 15px;">
+                    <div class="col-sm-auto">
+                        <img class="rounded-circle account-img" src="{{ requests.1.profile.image.url }}" alt="Image">
+                    </div>
+                    <div class="col-sm">
+                        <div class="row">
+                            <div class="col-12 article-metadata">
+                                <h2 class="account-heading" style="word-wrap: anywhere;">{{ requests.1.username }}</h2>
+                            </div>
+                            <div class="col-12">
+                            {% if requests.1.profile.bio %}
+                                <div class="text-secondary">{{ requests.1.profile.bio }}</div>
+                            {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3" style="margin: 0px; margin-bottom: 15px;">
+                    <a href="{% url 'friendRequestAccept' requests.0 %}" class="mr-2 mt-2">
+                        <button class='btn btn-outline-success' type="button">Accept</button>
+                    </a>
+                    <a href="{% url 'friendRequestReject' requests.0 %}" class="mt-2">
+                        <button class='btn btn-outline-danger' type="button">Reject</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="borde-posts">
+        <div class="container-fluid" style="padding: 15px;">
+            <div class="row" style="margin: 0px; margin-top: 15px;">
+                <div class="col-sm-auto">
+                    <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" alt="Image">
+                </div>
+                <div class="col-sm">
+                    <div class="row">
+                        <div class="col-12 article-metadata">
+                            <h2 class="account-heading" style="word-wrap: anywhere;">{{ user.username }}</h2>
+                        </div>
+                        <div class="col-12">
+                        {% if user.profile.bio %}
+                            <div class="text-secondary">{{ user.profile.bio }}</div>
+                        {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3" style="margin: 0px; margin-bottom: 15px;">
+                <a href="{% url 'settings' %}" class="mr-2 mt-2">
+                    <button class='btn btn-outline-info' type="button">Settings</button>
+                </a>
+                <a href="{% url 'changePassword' %}" class="mr-2 mt-2">
+                    <button class='btn btn-outline-info' type="button">Change your password</button>
+                </a>
+                <a href="{% url 'logout' %}" class="float-left mr-2 mt-2">
+                    <button class='btn btn-outline-info' type="button">Log out</button>
+                </a>    
+            </div>
+        </div>
+    </div>
+    <div class='content-section mt-3'>
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class='form-group mb-8'>
+                <legend class='border-bottom mb-4'>Get connected</legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class='btn btn-outline-info' type="submit">Submit url</button>
+            </div>
+        </form>
+	    <small class="mb-2">
+             Copy the link that is under "Beställ kalender" and then just paste it in above here, 
+             remember that this is only possible if you are accessing wilma through the internet NOT the app.
+        </small>
+        <img class="mt-2 img-fluid" src="https://www.finite.fi/Media/Guid.png" alt="Guide">
+    </div>
+
+{% endblock content %}

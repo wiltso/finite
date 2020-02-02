@@ -1,0 +1,48 @@
+{% extends "main/main2.html" %}
+{% block content %}
+<div class="container-fluid">
+    <p class="row">
+        {% block new_title %}{% endblock new_title %}
+        <h1 class="col-12 text-center">Terms and conditions</h1>
+        <p class="col-12 text-center">
+            By using Finite service and creating a Finite account, 
+            you agree to allow everyone using this service to access your schedule. 
+            Everyone, who has an account, 
+            can see your username and all schedule information available from the submitted URL. 
+            After you have submitted a Wilma URL, all your friends and the head of development (finite.fi(at)gmail.com), 
+            will be able to see your username as well as the classes you are on and all of the information listed above. 
+            In your settings, you can turn on and off “private mode”(default turned on), 
+            which limits the users that can see your schedule information to friends you have accepted in the service.
+        </p>
+        <h1 class="col-12 text-center mt-5">Privacy</h1>
+        <p class="col-12  text-center">
+            The most of the data this service collects comes form the wilma link.
+            The other data we collect is how often you use this service.
+            This means that if you are logged in we will save that you have logged in.
+            We also save the last time you accessed the site when you are logged in.
+            The data is stored in a database that only our head developer has access to.
+            our head developer is the only one who can access the data and dosen't share it with any one.
+            There is an inbuilt logger that logs of all of the connections made to the server. 
+        </p>
+        <h1 class="col-12 text-center mt-5">Wilma link submission</h1>
+        <p class="col-12  text-center">
+            When you submit the wilma link our head developer will get notifyed per mail how the submission whent.
+            This means that your class, school and user id will be sent per mail.
+            The mail also contains all of the titles of the classes you are on
+        </p>
+        <h1 class="col-12 text-center mt-5">Data handling</h1>
+        <p class="col-12  text-center">
+            With an increasing user base data protection is coming a bigger part of this service. 
+            Nowadays all personal data that is collected from the submission of the wilma url will be encrypted or hashed. 
+            The encryption process uses a hashed password that has salt added to it and encrypts the data with advanced encryption standards.
+        </p>
+        <h1 class="col-12 text-center mt-5">Cookies</h1>
+        <p class="col-12  text-center">
+            This site uses two cookies for security. 
+            One of the cookies is a CSRF cookie that provides security for the user's personal information. 
+            The second one is for authenticated users so that the server can verify that a person actually is them.
+        </p>
+    </p>
+</div>
+{% block tearms_sum_up %}{% endblock tearms_sum_up %}
+{% endblock %}

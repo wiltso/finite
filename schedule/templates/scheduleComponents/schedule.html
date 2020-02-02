@@ -1,0 +1,78 @@
+{% block schedule %}
+    {% for schedule in schedules %}
+        {% if canse %}
+        <div class="row ml-0" style="margin-right: -20px;">
+            <div class="col pr-0 pl-0" style="margin-left:-10px;">
+        {% else %}
+        <div class="row ml-0" style="margin-right: -40px">
+            <div class="col pr-0 pl-0" style="margin-left:-20px;">
+        {% endif %}
+                <div id="{{ schedule }}" class="jqs-demo mb-3 mr-0 ml-0"></div>
+            </div>
+        </div>
+    {% endfor %}
+    <script>
+        var data = {{ output|safe }}
+        var amaount = {{ schedules|safe }}
+        var dataLenght = Object.keys(data).length;
+        if(dataLenght == 1){
+            var my = false
+        }else{
+            var my = true
+        }
+        for(var schedule in amaount){
+            var test = []
+            var usernames = []
+            if (my === true){
+                test.push('My')
+                usernames.push('')
+            }
+            for(var place in data['they'][schedule.slice(-1)]){
+                for(var person in data['they'][schedule.slice(-1)][place]){
+                    test.push(person)
+                    usernames.push(data['they'][schedule.slice(-1)][place][person][1])
+                }
+            }
+            $('#'+schedule).jqs({        
+                mode: 'read',
+                days: test.length,
+                periodDuration: 1,
+                daysList: test,
+                usernameList: usernames,
+                seeProfile: !my,
+            });
+            if (my === true){
+                for(var myPeriods in data['My'][0]['periods']){
+                    $('#'+schedule).jqs('import', [
+                        {  
+                            day : '0',
+                            periods: [{
+                                start: data['My'][0]['periods'][myPeriods]['start'], 
+                                end: data['My'][0]['periods'][myPeriods]['end'], 
+                                title: data['My'][0]['periods'][myPeriods]['title'], 
+                                backgroundColor: '#69aa77', borderColor: '#000', textColor: '#fff'
+                            }]
+                        }
+                    ]);
+                }
+            }
+            for(var place in data['they'][schedule.slice(-1)]){
+                for(var person in data['they'][schedule.slice(-1)][place]){
+                    for(var hour in data['they'][schedule.slice(-1)][place][person][0]['periods']){
+                        $('#'+schedule).jqs('import', [
+                            {  
+                                day : data['they'][schedule.slice(-1)][place][person][0]['day'].toString(),
+                                periods: [{
+                                    start: data['they'][schedule.slice(-1)][place][person][0]['periods'][hour]['start'], 
+                                    end: data['they'][schedule.slice(-1)][place][person][0]['periods'][hour]['end'], 
+                                    title: data['they'][schedule.slice(-1)][place][person][0]['periods'][hour]['title'], 
+                                    backgroundColor: '#69aa77', borderColor: '#000', textColor: '#fff'
+                                }]
+                            }
+                        ]);
+                    }
+                }
+            }
+        }
+    </script>    
+{% endblock schedule %}

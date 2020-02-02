@@ -1,0 +1,82 @@
+{% extends "main/main2.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    {% block pageTitle %}{% include "mainComponents/title.html" %}{% endblock pageTitle %}
+    <div class="row justify-content-center mb-5">
+        <div class="col-10 text-center">
+            <h3 class="mb-4">1. Open up your own Wilma account in web browser. (does not work with the app!)</h3>
+        </div>
+        <div class="container-fluid d-none d-md-block mt-2 mb-4">
+            <div class="row justify-content-center">
+                <div class="col-md-12 col-lg-10 col-xl-9 text-center">
+                    <img class="img-fluid" src="/Media/WilmaGuid1LG.png" alt="At your wilma account">
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid d d-md-none mt-2 mb-4 justify-content-center text-center">
+            <div class="row justify-content-center">    
+                <div class="col-9 col-md-12 col-lg-10 col-xl-9 text-center">
+                    <img class="img-fluid" src="/Media/WilmaGuid1SM.png" alt="At your wilma accouxetrcydtfuygiuhnt">
+                </div>
+            </div>
+        </div>
+        <div class="col-10 text-center">
+            <h3>2. Go to the “schedule” (“Työjärjestys”, “Schema”) tab in Wilma.</h3>
+        </div>
+        <div class="container-fluid d-none d-md-block mt-2 mb-4">
+            <div class="row justify-content-center">
+                <div class="col-9 col-md-12 col-lg-10 col-xl-9 text-center">
+                    <img class="img-fluid" src="/Media/WilmaGuid2LG.png" alt="At your wilma account">
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid d d-md-none mt-2 mb-4 justify-content-center text-center">
+            <div class="row justify-content-center">
+                <div class="col-9 col-md-12 col-lg-10 col-xl-9 text-center">
+                    <img class="img-fluid" src="/Media/WilmaGuid2SM.png" alt="At your wilma accouxetrcydtfuygiuhnt">
+                </div>
+            </div>
+        </div>
+        <div class="col-10 text-center">
+            <h3>3. Find the small blue box that has an arrow going out of it. (It is next to the print icon)</h3>
+        </div>
+        <div class="container-fluid d-none d-md-block mt-2 mb-4">
+            <div class="row justify-content-center">
+                <div class="col-9 col-md-12 col-lg-10 col-xl-9 text-center">
+                    <img class="img-fluid" src="/Media/WilmaGuid3LG.png" alt="At your wilma account">
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid d d-md-none mt-2 mb-4 justify-content-center text-center">
+            <div class="row justify-content-center">
+                <div class="col-9 col-md-12 col-lg-10 col-xl-9 text-center">
+                    <img class="img-fluid" src="/Media/WilmaGuid3SM.png" alt="At your wilma accouxetrcydtfuygiuhnt">
+                </div>
+            </div>
+        </div>
+        <div class="col-10 text-center">
+            <h3 class="mb-4">4. Click on the box-icon.</h3>
+            <h3>5. And copy the link it creates for you and displayed in the middle of the yellow box</h3>
+        </div>
+        <div class="container-fluid d-none d-md-block mt-2 mb-4">
+            <div class="row justify-content-center">
+                <div class="col-9 col-md-12 col-lg-10 col-xl-9 text-center">
+                    <img class="img-fluid" src="/Media/WilmaGuid4LG.png" alt="At your wilma account">
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid d d-md-none mt-2 mb-4 justify-content-center text-center">
+            <div class="row justify-content-center">
+                <div class="col-9 col-md-12 col-lg-10 col-xl-9 text-center">
+                    <img class="img-fluid" src="/Media/WilmaGuid4SM.png" alt="At your wilma accouxetrcydtfuygiuhnt">
+                </div>
+            </div>
+        </div>
+        <div class="col-10 text-center">
+            <h3 class="mb-4">6. Then come back to Finite</h3>
+            <h3 class="mb-4">7. Go to the <a href="{% url 'importSchedule' %}">import your schedule</a> tab.</h3>
+            <h3 class="mb-4">8. Then just paste the link there. </h3>
+            <h3 class="mb-4">9. Press submit, and you are done!</h3>
+        </div>
+    </div>
+{% endblock %}

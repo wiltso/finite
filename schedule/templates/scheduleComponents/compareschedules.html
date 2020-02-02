@@ -1,0 +1,17 @@
+{% extends "main/main2.html" %}
+
+{% load staticfiles %}
+
+{% block cssFiles %}
+	<link rel="stylesheet" href="{% static 'jquery.schedule.css' %}">
+{% endblock cssFiles %}
+
+{% block scripts %}
+	<script type="text/javascript" src="{% static 'jquery.schedule.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    {% block pageTitle %}{% include "mainComponents/title.html" %}{% endblock pageTitle %}
+	{% block daybar %}{% include "scheduleComponents/daybarCompareschedule.html" %}{% endblock %}
+	{% block schedule %}{% include "scheduleComponents/schedule.html" %}{% endblock %}
+{% endblock content %}

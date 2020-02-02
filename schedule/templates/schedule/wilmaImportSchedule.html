@@ -1,0 +1,18 @@
+{% extends "main/main2.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    {% block pageTitle %}{% include "mainComponents/title.html" %}{% endblock pageTitle %}
+    <div class="col-12 text-center"><p>Paste in your Wilma URL to get connected</p></div>
+    <form method="POST" class="row">
+        {% csrf_token %}
+        <fieldset class='col-12 form-group mb-8'>
+            {{ form|crispy }}
+        </fieldset>
+        <div class="col-12 text-center form-group">
+            <button class='btn btn-outline-info' type="submit">Submit URL</button>
+        </div>
+    </form>
+    <div class="col-12 text-center mt-5">
+        <a href="{% url 'wilmaLinkInstructions' %}"><h4 style="color: #007bff;">Where do I find my Wilma URL?</h4></a>
+    </div>
+{% endblock %}

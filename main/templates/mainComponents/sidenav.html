@@ -1,0 +1,55 @@
+{% block sidenav %}
+    <div id="dismiss">
+        <i class="fas fa-chevron-right"></i>
+    </div>
+
+    <div class="sidebar-header" style="background: linear-gradient(to bottom, #69aa77 0%, #dfdfdf 100%);">
+            <a href="{% url 'front' %}"><h3>Finite</h3></a>
+    </div>
+    <ul class="list-unstyled components">
+        {% if user.is_authenticated %}
+            <li>
+                <a href="{% url 'shedule' 0 %}">Home</a>
+            </li>
+            <li>
+                <a href="{% url 'searchForFriends' %}">Search users</a>
+            </li>
+            <li class="">
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Friendships</a>
+                <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <li>
+                        <a href="{% url 'listfriends' %}">My friends</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'listBFFfriends' %}">Best friends</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                    <a class="nav-item nav-link" href="{% url 'importSchedule' %}">Import your schedule</a>
+            </li>
+            <li>
+                <a class="nav-item nav-link" href="{% url 'listgroups' %}">Groups</a>
+            </li>
+            {% if user.profile.friendRequest > 0 %}
+            <li>
+                <a class="nav-item nav-link" href="{% url 'profile' %}">Profile <span style="padding-right: 5px; padding-left: 5px;background-color: red; border-radius: 50%; color: white;"> {{ user.profile.friendRequest }} </span></a>
+            </li>    
+            {% else %}
+            <li>
+                <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
+            </li>
+            {% endif %}
+        {% else %}
+            <li>
+                <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            <li>
+                <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+            </li>
+        {% endif %}
+        <li>
+            <a class="font-normal font-italic" href='{% url "Terms" %}'>Terms & conditions</a>
+        </li>
+    </ul>
+{% endblock %}

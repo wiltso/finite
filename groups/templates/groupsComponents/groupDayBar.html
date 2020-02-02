@@ -1,0 +1,31 @@
+{% block daybar %}
+    <div class="row mb-5 mt-5">
+        <div class="col-12 col-md-4 text-left mt-4" style="z-index: 100;">
+            {% if day <= 0 %}
+                <a class="float-left items mr-3 mt-2 button-style bg-button" href="{% url ''|add:where  day=day group_name=groupname %}">To today</a>
+                <a class="float-left items mr-3 mt-2 button-style" href="{% url ''|add:where  day=day group_name=groupname %}">{{ date|date:"j M"}}</a>
+                <a class="float-left items mr-3 mt-2 button-style" href="{% url ''|add:where  day=nextday group_name=groupname %}">&rArr;</a>
+            {% elif day >= 7 %}
+                <a class="float-left items mr-3 mt-2 button-style bg-button" href="{% url ''|add:where  day=0 group_name=groupname %}">To today</a>
+                <a class="float-left items mr-3 mt-2 button-style" href="{% url ''|add:where  day=day group_name=groupname %}">{{ date|date:"j M"}}</a>
+                <a class="float-left items mr-3 mt-2 button-style" href="{% url ''|add:where  day=beforday group_name=groupname %}">&lArr;</a>
+            {% else %}
+                <a class="float-left items mr-3 mt-2 button-style bg-button" href="{% url ''|add:where  day=0 group_name=groupname %}">To today</a>
+                <a class="float-left items mr-3 mt-2 button-style" href="{% url ''|add:where  day=beforday group_name=groupname %}">&lArr;</a>
+                <a class="float-left items mr-3 mt-2 button-style" href="{% url ''|add:where  day=day group_name=groupname %}">{{ date|date:"j M"}}</a>
+                <a class="float-left items mr-3 mt-2 button-style" href="{% url ''|add:where  day=nextday group_name=groupname %}">&rArr;</button></a>
+            {% endif %}
+        </div>
+        <div class="col-12 col-md-8 text-md-right mt-4" style="z-index: 100;">
+                <a class="buttons" href="{% url 'addGroupMember' groupname %}" style="word-wrap: anywhere;">
+                    <button class='mt-2 btn btn-outline-success' type="button">Add member</button>
+                </a>
+                <a class="buttons" href="{% url 'removeGroupsMember' groupname %}" style="word-wrap: anywhere;">
+                    <button class='mt-2 btn btn-outline-warning' type="button">Remove member</button>
+                </a>
+                <a class="buttons" href="{% url 'deletegroup' groupname %}" style="word-wrap: anywhere;">
+                    <button class='mt-2 btn btn-outline-danger' type="button" onclick="return confirm('Are you sure you want to delete the group?')">Delete group</button>
+                </a>
+            </div>
+        </div>
+{% endblock daybar %}

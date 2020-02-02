@@ -1,0 +1,38 @@
+{% block daybar %}
+    <div class="daybar">
+        <div class="w-100 bg-blue">
+            <div class="container-fluid" style="color: #fff;" >
+                <div class="row">
+                    <div class="col">
+                        <a class="float-left buttons" href="{% url 'addGroupMember' groupname %}" style="word-wrap: anywhere;">
+                            <button class='btn btn-outline-success' type="button">Add member</button>
+                        </a>
+                        <a class="float-left buttons" href="{% url 'removeGroupsMember' groupname %}" style="word-wrap: anywhere;">
+                                <button class='btn btn-outline-warning' type="button">Remove member</button>
+                        </a>
+                        <a class="float-left buttons" href="{% url 'deletegroup' groupname %}" style="word-wrap: anywhere;">
+                                <button class='btn btn-outline-danger' type="button">Delete group</button>
+                        </a>
+                    </div>
+                </div>  
+                <div class="row">
+                    <div class="col">
+                    {% if day <= 0 %}
+                        <a class="float-left items" href="{% url ''|add:where  day=day groupname=groupname %}">Today</a>
+                        <a class="float-left items" href="{% url ''|add:where  day=nextday groupname=groupname %}">&rArr;</a>
+                    {% elif day >= 7 %}
+                        <a class="float-left items" href="{% url ''|add:where  day=0 groupname=groupname %}">Today</a>
+                        <a class="float-left items" href="{% url ''|add:where  day=day groupname=groupname %}">{{ date|date:"j M"}}</a>
+                        <a class="float-left items" href="{% url ''|add:where  day=beforday groupname=groupname %}">&lArr;</a>
+                    {% else %}
+                        <a class="float-left items" href="{% url ''|add:where  day=0 groupname=groupname %}">Today</a>
+                        <a class="float-left items" href="{% url ''|add:where  day=day groupname=groupname %}">{{ date|date:"j M"}}</a>
+                        <a class="float-left items" href="{% url ''|add:where  day=beforday groupname=groupname %}">&lArr;</a>
+                        <a class="float-left items" href="{% url ''|add:where  day=nextday groupname=groupname %}">&rArr;</button></a>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock daybar %}

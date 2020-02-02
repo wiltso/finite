@@ -1,0 +1,26 @@
+{% extends "main/main.html" %}
+{% block content %}
+    {% for user in users %}
+    <div class="borde-posts mb-4">
+        <div class="container-fluid" style="padding: 15px;">
+            <div class="row" style="margin: 0px; margin-top: 15px;">
+                <div class="col-sm-auto">
+                    <img class="rounded-circle account-img" style="height: 65px; width:65px;" src="{{ user.profile.image.url }}" alt="Image">
+                </div>
+                <div class="col-sm">
+                    <div class="row">
+                        <div class="col-12 article-metadata">
+                            <a class="mr-2" href="{% url 'seeprofile' user.username %}" style="word-wrap: anywhere;">{{ user.username }}</a>                        
+                        </div>
+                        <div class="col-12">
+                        {% if user.profile.bio %}
+                            <div class="text-secondary">{{user.profile.bio}}</div>
+                        {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock content %}

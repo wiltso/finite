@@ -1,0 +1,35 @@
+{% extends "main/main2.html" %}
+{% block content %}
+    {% block pageTitle %}{% include "mainComponents/title.html" %}{% endblock pageTitle %}
+    <div class="row">
+        <div class="col text-center">
+            <a href="{% url 'groupscreat' %}" style="word-wrap: anywhere;">
+                <button class='mb-4 btn btn-outline-info' type="button">Create a new group</button>
+            </a>
+        </div>
+    </div>
+    {% if groups %}
+        <div class="row mb-2">
+            <div class="col mt-5">
+                <h1 class="border-bottom border-dark text-center pb-3">Your groups</h1>
+            </div>
+        </div>
+        {% for group in groups %}
+            <div class="borde-posts mb-3">
+                <div class="col-12 text-center">
+                    <a class="" href="{% url 'seeGroup'  day=0 group_name=group.groupname %}" style="word-wrap: anywhere;"><h2 class="p-4">{{ group.groupname }}</h2></a>                        
+                </div>       
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="row text-center pt-4 mb-5">
+            <div class="col-12">
+                <h3>Appears you have no groups!</h3>
+            </div>
+            <div class="m-auto">
+                <p class="mb-0">Create some groups to</p>
+                <p class="mb-0">easily look up many of your friends' schedules</p>
+            </div>
+        </div>
+    {% endif %}
+{% endblock content %}

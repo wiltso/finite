@@ -1,0 +1,30 @@
+{% extends "userComponents/termsConditions.html" %}
+{% block new_title %}
+    <div class="col-12 text-center">
+        <h1>Update to</h1>
+    </div>
+{% endblock new_title %}
+{% block tearms_sum_up %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 text-center mt-5">
+            <h1 class="col-12 text-center">Short sum up</h1>
+                <h5 class="mt-3">Data handling</h5>
+                <h5 class="mt-3">Data secure storing</h5>
+                    <p>All person data that is collected from the wilma url submission is now encrypted or hashed</p>
+                <h5 class="mt-3">Cookies</h5>
+                    <p>Uses two cookies</p>
+                    <p>One of them is a csrf cookie that protects the service from hacks that submitts falty data</p>
+                    <p>The second one is a sessinId cookie this is only active if your are logged in and make sure that you are logged in to access private data</p>
+        </div>
+        <div class="col-12 text-center mt-3 mb-5">
+            <a href="{% url 'acceptedTearms' %}" class="mr-2 mt-2">
+                <button class='btn btn-outline-success' type="button">Accept</button>
+            </a>
+            <a href="{% url 'logout' %}" class="mr-2 mt-2">
+                <button class='btn btn-outline-danger' type="button">Logout</button>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock tearms_sum_up %}

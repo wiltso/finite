@@ -1,0 +1,94 @@
+{% extends "main/main2.html" %}
+{% block content %}
+    {% block pageTitle %}{% include "mainComponents/title.html" %}{% endblock pageTitle %}
+    {% if sender %}
+        <form id="searchform" class="example row mb-5" action="{% url sender %}">
+            <div class="col text-center">
+                {% if messages %}
+                    <input class="mb-2" id='searchinput' type="text" name='search' placeholder="Search...">
+                {% else %}
+                    <input class="mb-2" id='searchinput' type="text" name='search' value="{{ request.GET.search }}" placeholder="Search...">
+                {% endif %}
+                {% if user.profile.importsuccess %}
+                    <div id="div_id_school" class="form-check"> 
+                        <label for="id_school" class="form-check-label">
+                            {% if request.GET.school %}
+                                <input type="checkbox" name="school" class="checkboxinput form-check-input" id="id_school" value="True" checked>
+                            {% else %}
+                                <input type="checkbox" name="school" class="checkboxinput form-check-input" id="id_school" value="True">
+                            {% endif %}
+                            Only from my school
+                        </label> 
+                    </div>
+                    <div id="div_id_age" class="form-check mb-4"> 
+                        <label for="id_age" class="form-check-label">
+                            {% if request.GET.age %}
+                                <input type="checkbox" name="age" class="checkboxinput form-check-input" id="id_age" value="True" checked>
+                            {% else %}
+                                <input type="checkbox" name="age" class="checkboxinput form-check-input" id="id_age" value="True">
+                            {% endif %}
+                            Only from my grade
+                        </label> 
+                    </div>
+                {% endif %}
+                <button id='searchbutton' class="ml-3 mr-3 btn btn-outline-success" type="submit">Search</button>
+            </div>
+        </form>
+    {% endif %}
+    {% if messagesToUser %}
+        <div class="row text-center pt-4 mb-5">
+            <div class="col-12">
+                <h3>{{ messagesToUser.0 }}</h3>
+            </div>
+            <div class="m-auto">
+                {% for mess in messagesToUser.1 %}
+                    {% if mess == '' %}
+                        <br>
+                    {% else %}
+                        <p class="mb-0">{{ mess }}</p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% if messagesToUser.2 %}
+                <div class="col-12 mt-5">
+                    <h5>{{ messagesToUser.2 }}</h5>
+                </div>
+                <div class="m-auto">
+                    {% for mess in messagesToUser.3 %}
+                        <p class="mb-0">{{ mess }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+    {% if messagesToUser and users %}
+        <div class="row mb-2">
+            <div class="col mt-5">
+                <h3 class="border-bottom border-dark text-center pb-2">Public Profiles</h3>
+            </div>
+        </div>
+    {% endif %}
+    {% for user in users %}
+        <div class="borde-posts mb-3">
+            <div class="container-fluid" style="padding: 15px;">
+                <div class="row" style="margin: 0px; margin-top: 15px;">
+                    <div class="col-sm-auto">
+                        <img class="rounded-circle account-img" style="height: 65px; width:65px;" src="{{ user.profile.image.url }}" alt="Image">
+                    </div>
+                    <div class="col-sm">
+                        <div class="row">
+                            <div class="col-12 article-metadata">
+                                <a class="mr-2" href="{% url 'seeprofile' user.username %}" style="word-wrap: anywhere;">{{ user.username }}</a>                        
+                            </div>
+                            <div class="col-12">
+                            {% if user.profile.bio %}
+                                <div class="text-secondary">{{user.profile.bio}}</div>
+                            {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock content %}

@@ -1,0 +1,30 @@
+{% extends "main/main2.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="row">
+        <div class="text-center ml-auto mr-auto col-12 mb-4 mt-3">
+            <h1 style="font-size: 70px; font-weight:100;">Join now!</h1>
+        </div>
+    </div>
+    <div class='row justify-content-center'>
+        <div class="col-sm-12 col-md-10 col-lg-8 col-xl-8">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class='form-group'>
+                    {{ form|crispy }}
+                    <div class="font-normal">
+                        By regestering you are accepting the <a class="font-normal font-italic" href='{% url "Terms" %}'>Terms and conditions</a> for usage of the site
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    <button class='btn btn-outline-info' type="submit">Sign up</button>
+                </div>
+            </form>
+            <div class="border-top pt-3">
+                <small class="text-muted">
+                    Already have an account?<a class="ml-2" href='{% url "login" %}'>Sign in</a>
+                </small>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
