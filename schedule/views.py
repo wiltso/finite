@@ -581,7 +581,7 @@ def getScheduleForUser(user, day, place):
     return my
 
 
-# Gets the shedule for a user for the week that we are on right now
+# Gets the schedule for a user for the week that we are on right now
 # Outputs the dictionary that is used in the html
 def scheduleOutputWeek(user):
     # Gets the days that are in the week we are on

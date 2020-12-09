@@ -51,7 +51,7 @@ def addFriend(request, username):
     return redirect('searchForFriends')
 
 
-# The view when you have set a new password from the mail you get when you click forgotten passowrd
+# The view when you have set a new password from the mail you get when you click forgotten password
 def afterPasswordReset(request):
     messages.success(request, f"Your password has been updated")
     return redirect('login')
@@ -78,7 +78,7 @@ def profile(request):
         Q(pending=True)
     )
 
-    # Get's them to be in the correct format for the frontend
+    # Gets them to be in the correct format for the frontend
     friendRequests = list(
         map(
             lambda frindShipID: [frindShipID.id, User.objects.get(pk=frindShipID.user.pk)],
@@ -168,7 +168,7 @@ def seeProfile(request, username):
         status = request.POST.get('friendShipStatus')
         if status == 'bff':
             if len(Me.bff.all()) >= 6:
-                messages.warning(request, f'You can only have 6 best friends please remove one then you can add a new best frend')
+                messages.warning(request, f'You can only have 6 best friends please remove one then you can add a new best friend')
                 return redirect('listBFFfriends')
             Me.bff.add(they)
             Me.save()
@@ -180,9 +180,9 @@ def seeProfile(request, username):
     else:
         status = 'f'
 
-    varibel = {
+    variable = {
         'form': CountryForm(initial={'friendShipStatus': status}),
-        'canse': not Settings.objects.get(user_id=User.objects.get(username=username).pk).private,
+        'cansee': not Settings.objects.get(user_id=User.objects.get(username=username).pk).private,
         'output': "",
         'schedules': {"schedule1": '1'},
         'thefriend': User.objects.get(username=username),
@@ -190,29 +190,29 @@ def seeProfile(request, username):
         'pending': False
     }
     friendship = Friendship.objects.filter(
-        (Q(friend=varibel['thefriend'].pk) & Q(user=request.user.pk)) |
-        (Q(friend=request.user.pk) & Q(user=varibel['thefriend'].pk))
+        (Q(friend=variable['thefriend'].pk) & Q(user=request.user.pk)) |
+        (Q(friend=request.user.pk) & Q(user=variable['thefriend'].pk))
     )
 
     for i in friendship:
-        varibel['friend'] = True
-        varibel['canse'] = True
+        variable['friend'] = True
+        variable['cansee'] = True
         if i.pending is True:
-            varibel['pending'] = True
+            variable['pending'] = True
 
-    if varibel['canse'] is False or varibel['pending'] is True:
-        varibel['canse'] = False
-        return render(request, 'users/seeprofile.html', varibel)
+    if variable['cansee'] is False or variable['pending'] is True:
+        variable['cansee'] = False
+        return render(request, 'users/seeprofile.html', variable)
 
-    varibel['output'] = scheduleOutputWeek(they)
+    variable['output'] = scheduleOutputWeek(they)
 
     schedules = {}
-    for i in range(len(varibel['output']['they'])):
+    for i in range(len(variable['output']['they'])):
         schedules['schedule'+str(i)] = str(i)
 
-    varibel['schedules'] = schedules
+    variable['schedules'] = schedules
 
-    return render(request, 'users/seeprofile.html', varibel)
+    return render(request, 'users/seeprofile.html', variable)
 
 # View for when there has been a update to the tearms and conditions
 @login_required
@@ -261,7 +261,7 @@ def compareSchedules(request, username, day):
         'schedules': schedules,
         'day': day,
         'nextday': day+1,
-        'beforday': day-1,
+        'beforeday': day-1,
         'username': username,
         'date': datetoday,
         'where': 'compareSchedule',

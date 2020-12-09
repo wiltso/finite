@@ -4,7 +4,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 
 
-# Send emails to the persons allowd in the settings
+# Send emails to the persons allowed in the settings
 # This can be about how a schedule import when to the daily stats
 def sendMailToUsers(subject="Sorry for the inconveniences", whoSent="Finite"):
     # Email identification
@@ -13,7 +13,7 @@ def sendMailToUsers(subject="Sorry for the inconveniences", whoSent="Finite"):
 
     for user in User.objects.all():
 
-        # Sets the mail informatio
+        # Sets the mail information
         msg = EmailMessage()
         msg['Subject'] = subject
         msg['From'] = whoSent

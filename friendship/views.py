@@ -7,9 +7,9 @@ from users.models import Profile
 
 
 # The base query that sorts users in the correct order
-# Excludes test accounts (they use my email adress)
+# Excludes test accounts (they use my email address)
 # Also excludes the users that made the request
-# It's fine to do it like this becouse python is so laysi that it won't make the query
+# It's fine to do it like this because python is so lazy that it won't make the query
 # to the db here
 # It will make the query in the template first
 def baseQuery(request):
@@ -19,7 +19,7 @@ def baseQuery(request):
                     Case(When(profile__age=request.user.profile.age, then=1)), 'username')
 
 
-def makeQuerry(request, query, age, school):
+def makeQuery(request, query, age, school):
     users = baseQuery(request)
 
     if query:
@@ -48,17 +48,17 @@ def listAccountsSearch(request, moreMessages=None):
     if request.GET.get('search'):
         query = str(request.GET.get('search'))
 
-    # School and age you can do it directly becouse if there is not that args it will be False
+    # School and age you can do it directly because if there is not that args it will be False
     age = bool(request.GET.get('age'))
     school = bool(request.GET.get('school'))
 
     # Message needs to be global in the function
     messageToUser = False
 
-    users = makeQuerry(request, query, age, school)
+    users = makeQuery(request, query, age, school)
 
     # Sets the messages that are displayed if you make a query that has no results
-    # The messageToUser array might look a wierd here but it's made this way to make
+    # The messageToUser array might look a wired here but it's made this way to make
     # The html template more clear
     if query:
         if not users:
@@ -86,7 +86,7 @@ def listAccountsSearch(request, moreMessages=None):
                                        "Spread Finite to your friends!"]]
 
     else:
-        # Removes the accounts that have the pivate setting on
+        # Removes the accounts that have the private setting on
         # This is reversed due to updates and that we hade users when this was implemented
         # TODO: Reverse the private setting
         users = users.exclude(settings__private=True)
@@ -114,7 +114,7 @@ def listAccountsSearch(request, moreMessages=None):
 
 
 # This is the view that loads when you go to my friends
-# Or if you make a query there and your last query returnd with one or more users
+# Or if you make a query there and your last query returned with one or more users
 @login_required
 def listFriendsView(request):
     # Needs to be false if there is no search for a username
@@ -124,7 +124,7 @@ def listFriendsView(request):
     if request.GET.get('search'):
         query = str(request.GET.get('search'))
 
-    # School and age you can do it directly becouse if there is not that args it will be False
+    # School and age you can do it directly because if there is not that args it will be False
     age = bool(request.GET.get('age'))
     school = bool(request.GET.get('school'))
 
@@ -135,7 +135,7 @@ def listFriendsView(request):
     # This is so if you have no friend you can make a new query and find friends
     sender = "listfriends"
 
-    users = makeQuerry(request, query, age, school)
+    users = makeQuery(request, query, age, school)
 
     # filters away all of the users that is not a firend with the requesting person
     users = users.filter(
@@ -144,7 +144,7 @@ def listFriendsView(request):
     )
 
     # Sets the messages that are displayed if you make a query that has no results
-    # The messageToUser array might look a wierd here but it's made this way to make
+    # The messageToUser array might look a weird here but it's made this way to make
     # The html template more clear
     if query:
         if not users:
@@ -194,7 +194,7 @@ def listBFFFriendsView(request):
 
     # Gets all of the your BFFs users id
     myBFFs = Profile.objects.get(user_id=request.user.id).bff.all()
-    # Gets all of thos users User object
+    # Gets all of those users User object
     users = list(map(lambda x: User.objects.get(id=x.id), myBFFs))
 
     # If you don't have any friends this message will show

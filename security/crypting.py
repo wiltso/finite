@@ -20,11 +20,11 @@ def encrypt(text, password):
     # Generates the salt
     salt = uuid.uuid4().hex
 
-    # Creats the key that is used in the encrypting
+    # Creates the key that is used in the encrypting
     # Joins together the salt and the password
     private_key = hashlib.sha256(password.encode("utf-8") + salt.encode("utf-8")).digest()
 
-    # Encryts the data
+    # Encrypts the data
     iv = Random.new().read(AES.block_size)
     cipher = AES.new(private_key, AES.MODE_CBC, iv)
 
@@ -37,7 +37,7 @@ def decrypt(text, password) -> str:
     # Gets the salt and takes away the salt from the text
     salt, text = text[-32:], text[:-32]
 
-    # Creats the private key with the salt
+    # Creates the private key with the salt
     private_key = hashlib.sha256(password.encode("utf-8") + salt.encode("utf-8")).digest()
 
     # Makes it back to base64
@@ -46,9 +46,9 @@ def decrypt(text, password) -> str:
     # Make it into a aes object that can be decrypted
     cipher = AES.new(private_key, AES.MODE_CBC, text[:16])
 
-    # Make the function taht takes away the padding
+    # Make the function that takes away the padding
     def removePad(text):
         return text[:-ord(text[len(text) - 1:])]
 
-    # Returns the decrypted and unpadded text as a string
+    # Returns the decrypted and un padded text as a string
     return (removePad(cipher.decrypt(text[16:]))).decode()

@@ -8,10 +8,10 @@
             {% elif day >= 7 %}
                 <a class="float-left items mr-3 mt-2 button-style bg-button" href="{% url ''|add:where  day=0 group_name=groupname %}">To today</a>
                 <a class="float-left items mr-3 mt-2 button-style" href="{% url ''|add:where  day=day group_name=groupname %}">{{ date|date:"j M"}}</a>
-                <a class="float-left items mr-3 mt-2 button-style" href="{% url ''|add:where  day=beforday group_name=groupname %}">&lArr;</a>
+                <a class="float-left items mr-3 mt-2 button-style" href="{% url ''|add:where  day=beforeday group_name=groupname %}">&lArr;</a>
             {% else %}
                 <a class="float-left items mr-3 mt-2 button-style bg-button" href="{% url ''|add:where  day=0 group_name=groupname %}">To today</a>
-                <a class="float-left items mr-3 mt-2 button-style" href="{% url ''|add:where  day=beforday group_name=groupname %}">&lArr;</a>
+                <a class="float-left items mr-3 mt-2 button-style" href="{% url ''|add:where  day=beforeday group_name=groupname %}">&lArr;</a>
                 <a class="float-left items mr-3 mt-2 button-style" href="{% url ''|add:where  day=day group_name=groupname %}">{{ date|date:"j M"}}</a>
                 <a class="float-left items mr-3 mt-2 button-style" href="{% url ''|add:where  day=nextday group_name=groupname %}">&rArr;</button></a>
             {% endif %}

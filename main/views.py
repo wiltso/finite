@@ -14,7 +14,6 @@ from datetime import datetime, timedelta
 
 # TODO: Get the error pages up
 def error_404(request, e):
-    print('rftgyhuji')
     return render(request, 'main/error.html')
 
 
@@ -42,14 +41,14 @@ def sendReports(request):
     return redirect(home)
 
 # The view that is loaded when you go to home
-# It takes the request and the day you whant to be shown
+# It takes the request and the day you want to be shown
 @login_required
 def listSchedules(request, day):
     # If you don't have imported your schedule
     if (request.user.profile.age == "" or request.user.profile.age == "0") and request.user.profile.allinfo == '':
         messages.warning(request, f'Please go to "Import your schedule" and paste in your Wilma url(To find instruction click the link "Where do I find my wilma URL?")')
 
-    # To ensusre that pepole don't get stalket to far in to the futher
+    # To ensure that pepole don't get stalk to far in to the futher
     datetoday = datetime.date(datetime.now() + timedelta(days=day, hours=-3))
     mindate = datetime.date(datetime.now() + timedelta(days=-2, hours=-3))
     maxdate = datetime.date(datetime.now() + timedelta(days=8, hours=-3))
@@ -107,9 +106,9 @@ def listSchedules(request, day):
         'schedules': schedules,
         'day': day,
         'nextday': day+1,
-        'beforday': day-1,
+        'beforeday': day-1,
         'date': datetoday,
-        'where': 'shedule',
+        'where': 'schedule',
         'title': "Home",
 
     }

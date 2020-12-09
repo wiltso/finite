@@ -69,7 +69,7 @@ class Settings(models.Model):
     private = models.BooleanField(
         'Private profile?',
         default=True,
-        help_text="This is a setting that you can trun on so pepole can not see you schedule if they are not your friend"
+        help_text="This is a setting that you can turn on so pepole can not see you schedule if they are not your friend"
     )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)

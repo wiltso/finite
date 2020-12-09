@@ -23,11 +23,11 @@
                     {% elif day >= 7 %}
                         <a class="float-left items" href="{% url ''|add:where  day=0 groupname=groupname %}">Today</a>
                         <a class="float-left items" href="{% url ''|add:where  day=day groupname=groupname %}">{{ date|date:"j M"}}</a>
-                        <a class="float-left items" href="{% url ''|add:where  day=beforday groupname=groupname %}">&lArr;</a>
+                        <a class="float-left items" href="{% url ''|add:where  day=beforeday groupname=groupname %}">&lArr;</a>
                     {% else %}
                         <a class="float-left items" href="{% url ''|add:where  day=0 groupname=groupname %}">Today</a>
                         <a class="float-left items" href="{% url ''|add:where  day=day groupname=groupname %}">{{ date|date:"j M"}}</a>
-                        <a class="float-left items" href="{% url ''|add:where  day=beforday groupname=groupname %}">&lArr;</a>
+                        <a class="float-left items" href="{% url ''|add:where  day=beforeday groupname=groupname %}">&lArr;</a>
                         <a class="float-left items" href="{% url ''|add:where  day=nextday groupname=groupname %}">&rArr;</button></a>
                     {% endif %}
                     </div>

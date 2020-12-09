@@ -7,6 +7,6 @@ register_converter(NegativeIntConverter, 'negint')
 urlpatterns = [
     path('', views.home, name='home'),
     path('front/page/', views.gotToFront, name='front'),
-    path('<negint:day>/', views.listSchedules, name='shedule'),
+    path('<negint:day>/', views.listSchedules, name='schedule'),
     path('reporting/', views.sendReports, name="sendReports"),
 ]

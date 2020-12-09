@@ -7,11 +7,11 @@
                 <a class="float-left items mr-2 button-style" href="{% url ''|add:where  day=nextday %}">&rArr;</a>
             {% elif day >= 7 %}
                 <a class="float-left items mr-2 button-style bg-button" href="{% url ''|add:where  day=0 %}">To today</a>
-                <a class="float-left items mr-2 button-style" href="{% url ''|add:where  day=beforday %}">&lArr;</a>
+                <a class="float-left items mr-2 button-style" href="{% url ''|add:where  day=beforeday %}">&lArr;</a>
                 <a class="float-left items mr-2 button-style" href="{% url ''|add:where  day=day %}">{{ date|date:"j M"}}</a>
             {% else %}
                 <a class="float-left items mr-2 button-style bg-button" href="{% url ''|add:where  day=0 %}">To today</a>
-                <a class="float-left items mr-2 button-style" href="{% url ''|add:where  day=beforday %}">&lArr;</a>
+                <a class="float-left items mr-2 button-style" href="{% url ''|add:where  day=beforeday %}">&lArr;</a>
                 <a class="float-left items mr-2 button-style" href="{% url ''|add:where  day=day %}">{{ date|date:"j M"}}</a>
                 <a class="float-left items mr-2 button-style" href="{% url ''|add:where  day=nextday %}">&rArr;</button></a>
             {% endif %}

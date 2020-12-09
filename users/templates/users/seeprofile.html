@@ -2,13 +2,13 @@
 {% load crispy_forms_tags %}
 {% load staticfiles %}
 {% block cssFiles %}
-    {% if canse %}
+    {% if cansee %}
 	    <link rel="stylesheet" href="{% static 'jquery.schedule.css' %}">
     {% endif %}
 {% endblock cssFiles %}
 
 {% block scripts %}
-    {% if canse %}
+    {% if cansee %}
 	    <script type="text/javascript" src="{% static 'jquery.schedule.js' %}"></script>
     {% endif %}
 {% endblock %}
@@ -59,7 +59,7 @@
                 {% endif %}
             </div>
         </div>
-    {% if canse %}
+    {% if cansee %}
         {% block schedule %}{% include "scheduleComponents/schedule.html" %}{% endblock schedule %}
     {% endif %}
     <script>

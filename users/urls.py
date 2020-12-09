@@ -57,7 +57,7 @@ urlpatterns = [
             views.rejectFriendRequest,
             name='friendRequestReject'),
 
-      path('newTerms/', views.newTearms, name='newTermsAcceppted'),
+      path('newTerms/', views.newTearms, name='newTermsAccepted'),
       path('accepted/newterms/', views.acceptedNewTearms, name='acceptedTearms'),
 
 ]

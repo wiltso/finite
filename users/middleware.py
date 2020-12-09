@@ -37,4 +37,4 @@ class LoginRequiredMiddleware:
 
             if request.path not in ALLOWED_TEARMS_PATHS:
                 if not user.profile.acceptedlatest:
-                    return redirect("newTermsAcceppted")
+                    return redirect("newTermsAccepted")

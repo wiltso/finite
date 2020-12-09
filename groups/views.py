@@ -33,14 +33,14 @@ def Listgroups(request):
 # The view for creating groups
 # For now it's just for creating the private groups
 @login_required
-def creatGroup(request):
+def createGroup(request):
     # Gets the persons friends
     friends = baseFriendQuery(request)
 
-    # Makes the group name form so it can set the titel late if one is submitted
+    # Makes the group name form so it can set the title late if one is submitted
     group_name = GroupNameForm()
 
-    # the message varibel for the info to the user
+    # the message variable for the info to the user
     messages = ""
 
     # If there is a form that  is submitted
@@ -52,15 +52,15 @@ def creatGroup(request):
         # Sets the name of the name field to what the user submitted
         group_name.fillData(str(request.POST.get('name')))
 
-        # checks the the user dosen't have any same named groups that cloud cause a problem
+        # checks the the user doesn't have any same named groups that cloud cause a problem
         if name.checkForSameName(request.user.id, ''):
 
-            # Cleans ut all the users usernams form the submitted form
-            # Checks that is't a friend of yours
+            # Cleans ut all the users username form the submitted form
+            # Checks that it's a friend of yours
             # Returns False if there is any problem
             selectedFriends = members.myClean(friends.values('username'))
 
-            # If everything is okej if will creat the group and add all of the members
+            # If everything is ok if will create the group and add all of the members
             if selectedFriends:
                 group = Friendgroup(groupname=name.cleaned_data['name'], owner=request.user)
                 group.save()
@@ -98,10 +98,10 @@ def creatGroup(request):
 
 
 # The view that is loaded when you go to a specific group
-# It takes the request and the day you whant to be shown and the groupname
+# It takes the request and the day you want to be shown and the groupname
 @login_required
 def seeGroup(request, group_name, day):
-    # Gets the dates of the days that are on the end of the limite you can you a persons schedule
+    # Gets the dates of the days that are on the end of the limit you can see a persons schedule
     datetoday = datetime.date(datetime.now() + timedelta(days=day, hours=-3))
     mindate = datetime.date(datetime.now() + timedelta(days=-1, hours=-3))
     maxdate = datetime.date(datetime.now() + timedelta(days=8, hours=-3))
@@ -154,7 +154,7 @@ def seeGroup(request, group_name, day):
         'schedules': schedules,
         'day': day,
         'nextday': day + 1,
-        'beforday': day - 1,
+        'beforeday': day - 1,
         'groupname': group.groupname,
         'date': datetoday,
         'where': 'seeGroup',
@@ -164,7 +164,7 @@ def seeGroup(request, group_name, day):
 
 
 # Adds members to the group
-# Can alosw change the name of the group
+# Can also change the name of the group
 @login_required
 def addGroupMember(request, group_name):
     # Gets all of the persons friends that are not in the group
@@ -176,7 +176,7 @@ def addGroupMember(request, group_name):
         ]
     )
 
-    # Creats the group name form and sets the input value to what it is right now
+    # Creates the group name form and sets the input value to what it is right now
     group_name_form = GroupNameForm()
     group_name_form.fillData(str(group_name))
 
@@ -197,21 +197,21 @@ def addGroupMember(request, group_name):
         new_group_name = str(request.POST.get('name'))
         group_name_form.fillData(new_group_name)
 
-        # checks the the user dosen't have any same named groups that cloud cause a problem
+        # checks the the user doesn't have any same named groups that cloud cause a problem
         if name.checkForSameName(request.user.id, group_name):
 
             # Sets the group name the the new group name this
-            # If thay are the same nothing happens
+            # If they are the same nothing happens
             group = Friendgroup.objects.get(Q(groupname=group_name) & Q(owner=request.user))
             group.groupname = new_group_name
             group.save()
 
-            # Cleans ut all the users usernams form the submitted form
+            # Cleans ut all the users username form the submitted form
             # Checks that they are friends with you
             # Returns False if there is any problem
             selectedFriends = members.myClean(friends.values('username'))
 
-            # If everything is okej if will creat the group
+            # If everything is ok if will create the group
             if selectedFriends:
 
                 # Every member selected gets added to the group
@@ -248,8 +248,8 @@ def addGroupMember(request, group_name):
 
 
 # Removes members from the group
-# It can be one or many mambers
-# You can alsow change the name of the group
+# It can be one or many members
+# You can also change the name of the group
 @login_required
 def removeGroupMember(request, group_name):
     # Gets all of the persons friends that are not in the group
@@ -262,7 +262,7 @@ def removeGroupMember(request, group_name):
         )
     ])
 
-    # Creats the group name form and sets the value of the input field to what the name is now
+    # Creates the group name form and sets the value of the input field to what the name is now
     group_name_form = GroupNameForm()
     group_name_form.fillData(str(group_name))
 
@@ -282,7 +282,7 @@ def removeGroupMember(request, group_name):
         new_group_name = str(request.POST.get('name'))
         group_name_form.fillData(new_group_name)
 
-        # checks the the user dosen't have any same named groups that cloud cause a problem
+        # checks the the user doesn't have any same named groups that cloud cause a problem
         if name.checkForSameName(request.user.id, group_name):
 
             group = Friendgroup.objects.get(Q(groupname=group_name) & Q(owner=request.user))
@@ -323,7 +323,7 @@ def removeGroupMember(request, group_name):
         Group_member_from.fillData(friends)
         Group_member_from.setLabel('Select the friends you want to remove')
     else:
-        # This should never run but if you have no friends in the group and whant to remove them
+        # This should never run but if you have no friends in the group and want to remove them
         Group_member_from = ''
         messages = ['No friends', ['All of your friends', 'are in this group already']]
         title = 'Change group name'
