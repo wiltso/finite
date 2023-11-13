@@ -2,14 +2,14 @@
 {% load crispy_forms_tags %}
 {% block content %}
     {% block pageTitle %}{% include "mainComponents/title.html" %}{% endblock pageTitle %}
-    <div class="col-12 text-center"><p>Paste in your Wilma URL to get connected</p></div>
-    <form method="POST" class="row">
+    <div class="col-12 text-center"><p>Paste in your Wilma URL to get connected or select a ics file to import</p></div>
+    <form method="POST" class="row" enctype="multipart/form-data">
         {% csrf_token %}
-        <fieldset class='col-12 form-group mb-8'>
+        <fieldset class='col-12 form-group mb-8' style="text-align: center;">
             {{ form|crispy }}
         </fieldset>
         <div class="col-12 text-center form-group">
-            <button class='btn btn-outline-info' type="submit">Submit URL</button>
+            <button class='btn btn-outline-info' type="submit">Import</button>
         </div>
     </form>
     <div class="col-12 text-center mt-5">

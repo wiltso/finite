@@ -6,6 +6,7 @@ from django.conf import settings
 # Send emails to the persons allowed in the settings
 # This can be about how a schedule import when to the daily stats
 def sendMail(content, subject="Finites Reporting", whoSent="Finite stats"):
+    return
     # Email identification
     EMAIL_SENDER = settings.EMAIL_HOST_USER
     EMAIL_PASSWORD = settings.EMAIL_HOST_PASSWORD

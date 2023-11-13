@@ -11,8 +11,7 @@ from django.http import HttpResponse
 from datetime import datetime, timedelta
 from .models import Profile, Settings
 from .forms import (UserRegisterForm, UserUpdateForm, ProfileUpdateForm,
-                    WilmaURLForm, SettingsForm, CountryForm)
-from schedule.views import getWilmaData
+                    SettingsForm, CountryForm)
 from friendship.models import Friendship
 
 # Create your views here.

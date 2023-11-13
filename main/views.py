@@ -100,7 +100,7 @@ def listSchedules(request, day):
     schedules = {}
     for i in range(len(output['they'])):
         schedules['schedule' + str(i)] = str(i)
-
+    print(schedules)
     tohtml = {
         'output': output,
         'schedules': schedules,

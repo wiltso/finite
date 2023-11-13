@@ -26,10 +26,6 @@ class ProfileUpdateForm(forms.ModelForm):
         fields = ['image', 'bio']
 
 
-class WilmaURLForm(forms.Form):
-    url = forms.URLField(label='Paste in your wilma url to get connected:', max_length=500)
-
-
 class SettingsForm(forms.ModelForm):
     class Meta:
         model = Settings

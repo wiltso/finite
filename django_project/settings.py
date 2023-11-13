@@ -87,18 +87,10 @@ WSGI_APPLICATION = 'django_project.wsgi.application'
 # Change something else to default if you want to use sqlite db insted of psql
 # And change default to something else
 DATABASES = {
-    'Something else': {
+    'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     },
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME' 		: config['NAME'],
-        'USER'		: config['USER'],
-        'PASSWORD'	: config['PASSWORD'],
-        'HOST'		: config['HOST'],
-        'PORT'		: config['PORT']
-    }
 }
 
 

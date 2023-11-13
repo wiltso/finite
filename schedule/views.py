@@ -29,9 +29,12 @@ def importScheduleInstructions(request):
 @login_required
 def importSchedule(request):
     if request.method == 'POST':
-        form = WilmaURLForm(request.POST)
+        form = WilmaURLForm(request.POST, request.FILES)
         if form.is_valid():
-            getWilmaData(form.cleaned_data['url'], request)
+            if form.cleaned_data['url']:
+                getWilmaData(form.cleaned_data['url'], request)
+            else:
+                importIcsFile(form.cleaned_data['file'], request)
 
     else:
         form = WilmaURLForm()
@@ -517,6 +520,60 @@ def ICSApi(data, userRequest, url):
     sendMail(mailcontent,
              subject="New schedule",
              whoSent="Finite schedule import")
+
+    # Lets the user know everthing is okej
+    messages.success(userRequest, f'Your schedule has been successfully added')
+
+
+def importIcsFile(file, userRequest):
+    events = getEvents(file.read())
+    school = Schools.objects.get_or_create(school_name="File import")[0]
+
+    personal_password = hashing.strongHashing(userRequest.user.username,
+                                              userRequest.user.date_joined)
+
+    for event in events:
+        school_hour = Schools_hours()
+        school_hour.hourhash = "File import"
+        school_hour.school = school
+        for event_parts in event:
+                # Gets the start time and date
+                if event_parts == 'DTSTART':
+                    school_hour.startdate = datetime.date(event[event_parts].dt)
+                    school_hour.starttime = datetime.time(event[event_parts].dt)
+
+                # Gets the end time and date
+                elif event_parts == 'DTEND':
+                    school_hour.endtime = datetime.time(event[event_parts].dt)
+                    school_hour.enddate = datetime.date(event[event_parts].dt)
+
+                                # If The event will run for many weeks
+                elif event_parts == 'RRULE':
+                    for rules in event[event_parts]:
+                        for k in event[event_parts][rules]:
+                            if rules == 'UNTIL':
+                                # Updates the end date
+                                school_hour.enddate = k
+                            # The frequensy of the event happening
+                            elif rules == 'FREQ':
+                                # Need to add better frequensy
+                                if k == 'WEEKLY':
+                                    school_hour.frequense = 7
+                                else:
+                                    school_hour.frequense = 10
+
+                # Gets the information like what lesson it is
+                elif event_parts == 'SUMMARY':
+                    school_hour.summary = crypting.encrypt(str(event[event_parts]), personal_password)
+                    t = str(event[event_parts])
+                    school_hour.title = t
+
+                # Gets the description of the hour
+                elif event_parts == 'DESCRIPTION':
+                    school_hour.description = crypting.encrypt(str(event[event_parts]), personal_password)
+
+        school_hour.save()
+        userRequest.user.profile.hours.add(school_hour)
 
     # Lets the user know everthing is okej
     messages.success(userRequest, f'Your schedule has been successfully added')
